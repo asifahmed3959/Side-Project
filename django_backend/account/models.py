@@ -5,10 +5,7 @@ from datetime import timedelta
 
 from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import User
 from django.utils import timezone
-
-from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 
@@ -23,6 +20,17 @@ class User(IdAndActiveMixin, TimeStampMixin, AbstractUser):
     last_name = models.CharField(_('last name'), max_length=150, blank=False)
     email = models.EmailField(_('email address'), blank=False)
     verified = models.BooleanField(default=False)
+
+    groups = models.ManyToManyField(
+        'auth.Group',
+        blank=True,
+        related_name='+',  # ← disables reverse accessor entirely
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        blank=True,
+        related_name='+',  # ← disables reverse accessor entirely
+    )
 
     class Meta:
         db_table = 'user'

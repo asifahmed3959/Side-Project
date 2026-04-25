@@ -10,8 +10,6 @@ from .views import (
     TokenRefreshView,
 )
 
-router = DefaultRouter()
-
 urlpatterns = [
     # ── Auth ──────────────────────────────────────────────────────────────────
     path('auth/register/',       RegisterView.as_view(),     name='register'),
@@ -22,7 +20,4 @@ urlpatterns = [
     # ── Custom token management ───────────────────────────────────────────────
     path('auth/token/',          TokenInfoView.as_view(),    name='token-info'),
     path('auth/token/refresh/',  TokenRefreshView.as_view(), name='token-refresh'),
-
-    # ── Resources ─────────────────────────────────────────────────────────────
-    path('', include(router.urls)),
 ]

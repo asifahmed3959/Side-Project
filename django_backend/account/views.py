@@ -6,6 +6,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from django.contrib.auth import get_user_model
+
 from django_backend.authentication import CustomTokenAuthentication
 from .models import AuthToken
 from .serializers import (
@@ -14,6 +16,8 @@ from .serializers import (
     UserSerializer,
 )
 
+
+User = get_user_model()
 
 # ─── Mixin: enforce our custom backend on every auth view ────────────────────
 
